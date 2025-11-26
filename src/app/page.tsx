@@ -201,6 +201,28 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Loading Overlay */}
+      {status === "extracting" && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-4 text-center animate-fade-in">
+            <div className="relative w-20 h-20 mx-auto mb-6">
+              <div className="absolute inset-0 rounded-full border-4 border-secondary"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+              <Sparkles className="absolute inset-0 m-auto w-8 h-8 text-primary animate-pulse" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Extracting Data</h3>
+            <p className="text-muted mb-4">
+              AI is analyzing your document and extracting structured data...
+            </p>
+            <div className="flex items-center justify-center gap-1">
+              <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+              <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+              <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 pb-20">
         <div className="animated-border p-6 md:p-8">

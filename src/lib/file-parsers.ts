@@ -16,7 +16,9 @@ export interface ParsedContent {
  * Parse PDF file to text using unpdf (serverless compatible)
  */
 export async function parsePDF(buffer: Buffer): Promise<ParsedContent> {
-  const { text, totalPages } = await extractText(buffer, { mergePages: true });
+  // Convert Buffer to Uint8Array as required by unpdf
+  const uint8Array = new Uint8Array(buffer);
+  const { text, totalPages } = await extractText(uint8Array, { mergePages: true });
   
   // extractText returns array when mergePages is true, join if needed
   const textContent = Array.isArray(text) ? text.join("\n") : text;
