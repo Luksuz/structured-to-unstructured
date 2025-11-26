@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     config.resolve.alias.encoding = false;
     return config;
   },
-  serverExternalPackages: ["pdf-parse"],
 };
 
 export default nextConfig;

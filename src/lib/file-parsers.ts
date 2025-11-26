@@ -1,4 +1,4 @@
-import pdfParse from "pdf-parse";
+import { extractText } from "unpdf";
 import mammoth from "mammoth";
 import Papa from "papaparse";
 
@@ -13,15 +13,19 @@ export interface ParsedContent {
 }
 
 /**
- * Parse PDF file to text
+ * Parse PDF file to text using unpdf (serverless compatible)
  */
 export async function parsePDF(buffer: Buffer): Promise<ParsedContent> {
-  const data = await pdfParse(buffer);
+  const { text, totalPages } = await extractText(buffer, { mergePages: true });
+  
+  // extractText returns array when mergePages is true, join if needed
+  const textContent = Array.isArray(text) ? text.join("\n") : text;
+  
   return {
-    text: data.text,
+    text: textContent,
     type: "pdf",
     metadata: {
-      pages: data.numpages,
+      pages: totalPages,
     },
   };
 }
